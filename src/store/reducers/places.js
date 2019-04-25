@@ -33,7 +33,7 @@ const placesReducer = (state = initialState, action) => {
     case SELECT_PLACE:
       return {
         ...state,
-        selectedPlace: state.places.find(place => place.key === action.palceKey)
+        selectedPlace: state.places.find(place => place.key === action.placeKey)
       };
     case UNSELECT_PLACE:
       return {

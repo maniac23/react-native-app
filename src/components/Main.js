@@ -13,13 +13,29 @@ import {
 } from '../store/actions';
 
 class Main extends Component {
+  placeAddedHandler = placeName => {
+    this.props.onAddPlace(placeName);
+  };
+
+  placeDeletedHandler = () => {
+    this.props.onDeletePlace();
+  };
+
+  modalClosedHandler = () => {
+    this.props.onUnselectPlace();
+  };
+
+  placeSelectedHandler = key => {
+    this.props.onSelectPlace(key);
+  };
+
   render() {
     return (
       <View style={styles.container}>
         <PlaceDetail
-        // selectedPlace={this.state.selectedPlace}
-        // onItemDeleted={this.placeDeletedHandler}
-        // onModalClosed={this.modalClosedHandler}
+          selectedPlace={this.props.selectedPlace}
+          onItemDeleted={this.placeDeletedHandler}
+          onModalClosed={this.modalClosedHandler}
         />
         <PlaceInput onPlaceAdded={this.placeAddedHandler} />
         <PlaceList
@@ -52,8 +68,8 @@ const mapDispatchToProps = dispatch => {
   return {
     onAddPlace: placeName => dispatch(addPlace(placeName)),
     onDeletePlace: () => dispatch(deletePlace()),
-    onSelectPlace: key => dispatch(selectPlace(key)),
-    onUnselectPlace: () => dispatch(deselectPlace())
+    onSelectPlace: placeKey => dispatch(selectPlace(placeKey)),
+    onUnselectPlace: () => dispatch(unselectPlace())
   };
 };
 
